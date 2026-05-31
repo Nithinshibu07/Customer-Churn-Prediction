@@ -88,7 +88,24 @@ customer-churn-prediction
 * Repository Setup Completed
 * Dataset Uploaded
 * Data Understanding Completed
-* Exploratory Data Analysis In completed
+* Data Quality Assessment Completed
+* Exploratory Data Analysis Completed
+* Key Churn Drivers Identified
+* EDA Visualizations Generated and Documented
+* Data Cleaning and Feature Engineering (Next Phase)
+
+
+---
+
+## Key Findings from Exploratory Data Analysis
+
+* Overall churn rate is 26.5%, indicating a moderate class imbalance.
+* Customers with shorter tenure are significantly more likely to churn.
+* Month-to-month contracts show the highest churn rates compared to long-term contracts.
+* Fiber optic customers churn at a substantially higher rate than DSL customers.
+* Customers with higher monthly charges are more likely to leave the service.
+* Geographic attributes provide limited predictive value for churn.
+* Contract type, tenure, and monthly charges emerged as the strongest churn indicators.
 
 ---
 
