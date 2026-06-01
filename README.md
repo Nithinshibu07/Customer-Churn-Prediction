@@ -85,14 +85,15 @@ customer-churn-prediction
 
 ## Current Progress
 
-* Repository Setup Completed
-* Dataset Uploaded
-* Data Understanding Completed
-* Data Quality Assessment Completed
-* Exploratory Data Analysis Completed
-* Key Churn Drivers Identified
-* EDA Visualizations Generated and Documented
-* Data Cleaning and Feature Engineering (Next Phase)
+### Completed
+- EDA
+- Data Cleaning
+
+### In Progress
+- Feature Engineering
+
+### Upcoming
+- Model Training
 
 
 ---
