@@ -4,15 +4,15 @@
 
 This project focuses on predicting customer churn for a telecommunications company using machine learning techniques. The objective is to identify customers who are likely to discontinue their services and uncover the key factors influencing churn behavior.
 
-By proactively identifying at-risk customers, businesses can implement targeted retention strategies, improve customer satisfaction, and reduce revenue loss.
+The insights generated from this project can help businesses improve customer retention strategies and reduce revenue loss.
 
 ---
 
 ## Business Problem
 
-Customer churn is a significant challenge in the telecommunications industry. Acquiring new customers is often more expensive than retaining existing ones. Therefore, understanding churn patterns and predicting potential churners is critical for business growth and profitability.
+Customer churn is a major challenge in the telecommunications industry. Retaining existing customers is often more cost-effective than acquiring new ones.
 
-This project aims to develop a robust machine learning model capable of predicting customer churn and generating actionable business insights.
+This project aims to develop a machine learning model capable of predicting customer churn and identifying the factors that contribute most to customer attrition.
 
 ---
 
@@ -24,19 +24,17 @@ This project aims to develop a robust machine learning model capable of predicti
 
 **Target Variable:**
 
-* Churn Label (Yes / No)
+- Churn Label (Yes / No)
 
-### Dataset Features
+### Dataset Includes
 
-The dataset contains customer-related information including:
-
-* Customer demographics
-* Service subscriptions
-* Internet services
-* Billing information
-* Contract details
-* Payment methods
-* Customer lifetime value metrics
+- Customer demographics
+- Service subscriptions
+- Internet services
+- Billing information
+- Contract details
+- Payment methods
+- Customer lifetime value metrics
 
 ---
 
@@ -49,199 +47,160 @@ The dataset contains customer-related information including:
 5. Feature Engineering
 6. Data Preprocessing
 7. Model Development
-8. Model Evaluation
-9. Feature Importance Analysis
-10. Customer Risk Segmentation
+8. Model Comparison
+9. Model Evaluation
+10. Feature Importance Analysis
 11. Business Recommendations
 
 ---
 
-## Exploratory Data Analysis Highlights
+## Key Findings from Exploratory Data Analysis
 
-Key insights discovered during EDA:
-
-* Overall churn rate is approximately 26.5%, indicating moderate class imbalance.
-* Customers with shorter tenure are significantly more likely to churn.
-* Month-to-month contracts exhibit the highest churn rates.
-* Fiber optic customers churn at a higher rate than DSL customers.
-* Customers with higher monthly charges tend to have higher churn probability.
-* Geographic attributes provide limited predictive value.
-* Contract type, tenure, and monthly charges emerged as strong churn indicators.
+- Overall churn rate is approximately **26.5%**.
+- Customers with shorter tenure are more likely to churn.
+- Month-to-month contracts show significantly higher churn rates.
+- Fiber optic customers exhibit higher churn than DSL customers.
+- Customers with higher monthly charges tend to churn more frequently.
+- Contract type, tenure, and monthly charges emerged as strong churn indicators.
 
 ---
 
 ## Data Cleaning
 
-The following preprocessing steps were performed:
+The following data cleaning steps were performed:
 
-### Missing Values
+- Missing value analysis
+- Duplicate record verification
+- Data type corrections
+- Removal of irrelevant and leakage-prone features
 
-* Identified and analyzed missing values.
-* Converted `Total Charges` to numeric format.
-* Replaced invalid values with appropriate defaults.
+### Removed Features
 
-### Duplicate Records
-
-* Verified duplicate customer records.
-
-### Feature Selection
-
-Removed columns that provided limited predictive value or could introduce data leakage:
-
-* CustomerID
-* Count
-* Country
-* State
-* City
-* Zip Code
-* Lat Long
-* Latitude
-* Longitude
-* Churn Value
-* Churn Score
-* Churn Reason
-* CLTV
+- CustomerID
+- Count
+- Country
+- State
+- City
+- Zip Code
+- Lat Long
+- Latitude
+- Longitude
+- Churn Value
+- Churn Score
+- Churn Reason
+- CLTV
 
 ---
 
 ## Feature Engineering
 
-Several business-driven features were created to enhance predictive performance and better represent customer behavior.
+Several business-driven features were created to improve model performance and better represent customer behavior.
 
-### 1. Tenure Group
+### Tenure Group
 
-Customers were segmented based on subscription duration:
+Customers were categorized based on their subscription duration:
 
-| Group       | Tenure Range |
-| ----------- | ------------ |
-| New         | 0–12 Months  |
-| Growing     | 13–24 Months |
+| Group | Tenure Range |
+|---------|------------|
+| New | 0–12 Months |
+| Growing | 13–24 Months |
 | Established | 25–48 Months |
-| Loyal       | 49–72 Months |
+| Loyal | 49–72 Months |
 
-Purpose:
+### Service Count
 
-* Capture customer lifecycle stages.
-* Improve churn pattern identification.
+Calculated the total number of active services subscribed by each customer, including:
 
----
+- Phone Service
+- Multiple Lines
+- Online Security
+- Online Backup
+- Device Protection
+- Tech Support
+- Streaming TV
+- Streaming Movies
 
-### 2. Service Count
+### Auto Payment
 
-Calculated the total number of active services subscribed by each customer.
+Binary feature indicating whether the customer uses an automatic payment method.
 
-Included services:
+### Security Bundle
 
-* Phone Service
-* Multiple Lines
-* Online Security
-* Online Backup
-* Device Protection
-* Tech Support
-* Streaming TV
-* Streaming Movies
+Binary feature indicating whether the customer subscribes to both:
 
-Purpose:
-
-* Measure customer engagement.
-* Assess service adoption levels.
+- Online Security
+- Tech Support
 
 ---
 
-### 3. Auto Payment
+## Data Preprocessing
 
-Created a binary indicator identifying customers using automatic payment methods.
+The following preprocessing techniques were applied:
 
-Values:
-
-* 1 → Automatic Payment
-* 0 → Manual Payment
-
-Purpose:
-
-* Capture billing behavior patterns associated with retention.
+- Target variable encoding
+- Binary encoding
+- One-hot encoding
+- Feature scaling using StandardScaler
+- Train-test split
+- Class imbalance handling using SMOTE
 
 ---
 
-### 4. Security Bundle
+## Models Evaluated
 
-Created a binary feature identifying customers subscribed to both:
+The following machine learning models were evaluated using 5-fold cross-validation and F1-score:
 
-* Online Security
-* Tech Support
+| Model | Mean F1 Score |
+|---------|---------:|
+| Random Forest | 0.857 |
+| LightGBM | 0.838 |
+| XGBoost | 0.837 |
+| Logistic Regression | 0.820 |
 
-Purpose:
+### Current Best Model
 
-* Represent customers with enhanced service protection and support coverage.
+**Random Forest Classifier**
 
----
-
-## Data Preprocessing (Current Phase)
-
-The next stage focuses on preparing data for machine learning models.
-
-Planned tasks include:
-
-* Encoding categorical variables
-* Handling class imbalance
-* Feature scaling (if required)
-* Train-test splitting
-* Building preprocessing pipelines
-
----
-
-## Models Planned
-
-The following machine learning models will be evaluated:
-
-* Logistic Regression
-* Random Forest Classifier
-* LightGBM
-* XGBoost
-
-Models will be compared using multiple evaluation metrics to identify the best-performing solution.
+Mean Cross-Validated F1 Score: **0.857**
 
 ---
 
 ## Evaluation Metrics
 
-Model performance will be evaluated using:
+The models are evaluated using:
 
-* Accuracy
-* Precision
-* Recall
-* F1-Score
-* ROC-AUC Score
-* Confusion Matrix
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- ROC-AUC Score
+- Confusion Matrix
 
-Special emphasis will be placed on Recall and ROC-AUC due to the business importance of identifying potential churners.
+Special emphasis is placed on Recall and F1-Score to effectively identify customers at risk of churn.
 
 ---
 
-## Tools & Technologies
+## Tools and Technologies
 
 ### Programming Language
 
-* Python
+- Python
 
 ### Libraries
 
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* Scikit-learn
-* LightGBM
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- LightGBM
+- XGBoost
+- Imbalanced-learn
 
 ### Development Environment
 
-* Google Colab
-* Jupyter Notebook
-
-### Version Control
-
-* Git
-* GitHub
+- Google Colab
+- Jupyter Notebook
 
 ---
 
@@ -261,8 +220,7 @@ customer-churn-prediction
 │   └── figures
 │
 ├── README.md
-├── requirements.txt
-└── .gitignore
+└── requirements.txt
 ```
 
 ---
@@ -271,50 +229,36 @@ customer-churn-prediction
 
 ### Completed
 
-* Business Understanding
-* Data Understanding
-* Exploratory Data Analysis (EDA)
-* Data Cleaning
-* Feature Engineering
+- Business Understanding
+- Data Understanding
+- Exploratory Data Analysis (EDA)
+- Data Cleaning
+- Feature Engineering
+- Data Preprocessing
+- Model Development
+- Model Comparison
 
 ### In Progress
 
-* Data Preprocessing
+- Final Model Evaluation
+- Feature Importance Analysis
 
 ### Upcoming
 
-* Model Development
-* Model Evaluation
-* Hyperparameter Tuning
-* Feature Importance Analysis
-* Customer Risk Segmentation
-* Business Recommendations
+- Business Recommendations
+- Project Conclusion
 
 ---
 
 ## Future Enhancements
 
-* Hyperparameter Optimization
-* Ensemble Learning Techniques
-* Customer Risk Scoring System
-* Streamlit Deployment
-* Interactive Business Dashboard
-* Retention Strategy Recommendation Engine
+- Hyperparameter Tuning
+- Ensemble Modeling
+- Customer Risk Scoring
+- Streamlit Deployment
+- Interactive Dashboard
 
 ---
 
-## Author
 
-**Nithin Shibu**
-
-Aspiring Data Analyst | Data Science Enthusiast
-
-Skills:
-
-* Python
-* SQL
-* Statistics
-* Machine Learning
-* Data Visualization
-
-This project demonstrates an end-to-end machine learning workflow, from business understanding and exploratory analysis to predictive modeling and business-focused insights.
+This project demonstrates an end-to-end machine learning workflow, from business understanding and exploratory analysis to predictive modeling and actionable business insights.
