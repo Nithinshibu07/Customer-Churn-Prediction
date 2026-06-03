@@ -237,10 +237,7 @@ customer-churn-prediction
 - Data Preprocessing
 - Model Development
 - Model Comparison
-
-### In Progress
-
-- Final Model Evaluation
+-Final Model Evaluation
 - Feature Importance Analysis
 
 ### Upcoming
