@@ -223,17 +223,64 @@ The recall score indicates that approximately 65% of churning customers are corr
 
 ---
 
-## Feature Importance
+## Feature Importance Analysis
 
-The most influential features contributing to churn prediction include:
+To better understand the factors influencing customer churn, feature importance analysis was performed using the selected Random Forest model.
 
-* Contract Type
-* Tenure Months
-* Monthly Charges
-* Total Charges
-* Internet Service
+### Top Predictive Features
 
-These variables have the strongest impact on customer churn behavior.
+The most influential features identified by the model include:
+
+- Contract Type
+- Tenure Months
+- Monthly Charges
+- Total Charges
+- Internet Service
+
+### Observation
+
+Customers with month-to-month contracts, shorter tenure periods, and higher monthly charges show a greater likelihood of churning.
+
+Long-term customers with stable contracts are significantly less likely to leave.
+
+---
+
+## Key Churn Drivers
+
+Based on exploratory analysis and feature importance results, the major drivers of churn are:
+
+### Contract Type
+
+Customers on month-to-month contracts exhibit substantially higher churn rates compared to customers on one-year or two-year contracts.
+
+### Customer Tenure
+
+Customers who recently joined the company are more likely to churn than long-term customers.
+
+### Monthly Charges
+
+Higher monthly charges are associated with increased churn risk.
+
+### Internet Service Type
+
+Fiber optic customers tend to churn more frequently than customers using DSL services.
+
+### Total Charges
+
+Customers with lower accumulated spending generally represent newer customers and show higher churn tendencies.
+
+---
+
+## Business Insights
+
+The analysis suggests that customer retention efforts should focus on:
+
+- Customers with short tenure
+- Month-to-month contract subscribers
+- High monthly charge customers
+- Fiber optic service users
+
+These customer segments represent the highest churn risk and may benefit from targeted retention campaigns.
 
 ---
 
