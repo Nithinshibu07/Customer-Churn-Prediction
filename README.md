@@ -2,17 +2,17 @@
 
 ## Project Overview
 
-This project focuses on predicting customer churn for a telecommunications company using machine learning techniques. The objective is to identify customers who are likely to discontinue their services and uncover the key factors influencing churn behavior.
+This project focuses on predicting customer churn for a telecommunications company using machine learning techniques. The objective is to identify customers who are likely to discontinue their services and understand the factors that contribute to customer attrition.
 
-The insights generated from this project can help businesses improve customer retention strategies and reduce revenue loss.
+The insights generated from this project can help businesses improve customer retention strategies and reduce customer loss.
 
 ---
 
 ## Business Problem
 
-Customer churn is a major challenge in the telecommunications industry. Retaining existing customers is often more cost-effective than acquiring new ones.
+Customer churn is one of the most significant challenges faced by subscription-based businesses. Identifying customers who are likely to leave allows organizations to take proactive actions through targeted retention campaigns and personalized offers.
 
-This project aims to develop a machine learning model capable of predicting customer churn and identifying the factors that contribute most to customer attrition.
+The goal of this project is to build a machine learning model capable of predicting customer churn and identifying the key drivers behind customer departures.
 
 ---
 
@@ -24,112 +24,112 @@ This project aims to develop a machine learning model capable of predicting cust
 
 **Target Variable:**
 
-- Churn Label (Yes / No)
+* Churn Label (Yes / No)
 
-### Dataset Includes
+### Dataset Features
 
-- Customer demographics
-- Service subscriptions
-- Internet services
-- Billing information
-- Contract details
-- Payment methods
-- Customer lifetime value metrics
+The dataset contains information related to:
+
+* Customer demographics
+* Service subscriptions
+* Internet services
+* Billing information
+* Contract details
+* Payment methods
+* Customer lifetime information
 
 ---
 
 ## Project Workflow
 
-1. Business Understanding
-2. Data Understanding
+1. Data Understanding
+2. Data Cleaning
 3. Exploratory Data Analysis (EDA)
-4. Data Cleaning
-5. Feature Engineering
-6. Data Preprocessing
-7. Model Development
-8. Model Comparison
-9. Model Evaluation
-10. Feature Importance Analysis
-11. Business Recommendations
+4. Feature Engineering
+5. Data Preprocessing
+6. Model Development
+7. Cross Validation
+8. Class Imbalance Handling
+9. Hyperparameter Tuning
+10. Model Evaluation
+11. Model Selection
 
 ---
 
-## Key Findings from Exploratory Data Analysis
+## Exploratory Data Analysis
 
-- Overall churn rate is approximately **26.5%**.
-- Customers with shorter tenure are more likely to churn.
-- Month-to-month contracts show significantly higher churn rates.
-- Fiber optic customers exhibit higher churn than DSL customers.
-- Customers with higher monthly charges tend to churn more frequently.
-- Contract type, tenure, and monthly charges emerged as strong churn indicators.
+Key observations obtained during EDA:
+
+* Overall churn rate is approximately 26.5%.
+* Customers with shorter tenure are more likely to churn.
+* Customers paying higher monthly charges show a greater tendency to churn.
+* Month-to-month contracts exhibit the highest churn rate.
+* Fiber optic customers have higher churn rates compared to other internet service types.
+* Longer customer tenure is associated with lower churn probability.
 
 ---
 
 ## Data Cleaning
 
-The following data cleaning steps were performed:
+The following preprocessing steps were performed:
 
-- Missing value analysis
-- Duplicate record verification
-- Data type corrections
-- Removal of irrelevant and leakage-prone features
+* Missing value analysis
+* Duplicate record verification
+* Data type corrections
+* Removal of irrelevant features
+* Removal of target leakage variables
 
-### Removed Features
+### Features Removed
 
-- CustomerID
-- Count
-- Country
-- State
-- City
-- Zip Code
-- Lat Long
-- Latitude
-- Longitude
-- Churn Value
-- Churn Score
-- Churn Reason
-- CLTV
+* CustomerID
+* Count
+* Country
+* State
+* City
+* Zip Code
+* Lat Long
+* Latitude
+* Longitude
+* Churn Value
+* Churn Score
+* CLTV
+* Churn Reason
+
+These variables were removed because they were either identifiers, high-cardinality location fields, or potential sources of target leakage.
 
 ---
 
 ## Feature Engineering
 
-Several business-driven features were created to improve model performance and better represent customer behavior.
+To improve predictive performance, several business-driven features were created.
 
 ### Tenure Group
 
-Customers were categorized based on their subscription duration:
+Customers were grouped according to subscription duration:
 
-| Group | Tenure Range |
-|---------|------------|
-| New | 0–12 Months |
-| Growing | 13–24 Months |
+| Group       | Tenure Range |
+| ----------- | ------------ |
+| New         | 0–12 Months  |
+| Growing     | 13–24 Months |
 | Established | 25–48 Months |
-| Loyal | 49–72 Months |
+| Loyal       | 49–72 Months |
 
 ### Service Count
 
-Calculated the total number of active services subscribed by each customer, including:
+The total number of subscribed services was calculated using:
 
-- Phone Service
-- Multiple Lines
-- Online Security
-- Online Backup
-- Device Protection
-- Tech Support
-- Streaming TV
-- Streaming Movies
+* Phone Service
+* Multiple Lines
+* Online Security
+* Online Backup
+* Device Protection
+* Tech Support
+* Streaming TV
+* Streaming Movies
 
 ### Auto Payment
 
-Binary feature indicating whether the customer uses an automatic payment method.
-
-### Security Bundle
-
-Binary feature indicating whether the customer subscribes to both:
-
-- Online Security
-- Tech Support
+A binary feature indicating whether the customer uses an automatic payment method.
 
 ---
 
@@ -137,46 +137,103 @@ Binary feature indicating whether the customer subscribes to both:
 
 The following preprocessing techniques were applied:
 
-- Target variable encoding
-- Binary encoding
-- One-hot encoding
-- Feature scaling using StandardScaler
-- Train-test split
-- Class imbalance handling using SMOTE
+* Target variable encoding
+* One-hot encoding
+* Feature scaling using StandardScaler
+* Stratified train-test split
+* Class imbalance handling using SMOTE
 
 ---
 
-## Models Evaluated
+## Cross Validation
 
-The following machine learning models were evaluated using 5-fold cross-validation and F1-score:
+Two machine learning models were evaluated using 5-Fold Stratified Cross Validation.
 
-| Model | Mean F1 Score |
-|---------|---------:|
-| Random Forest | 0.857 |
-| LightGBM | 0.838 |
-| XGBoost | 0.837 |
-| Logistic Regression | 0.820 |
+### Cross Validation Results
 
-### Current Best Model
+| Model         | ROC-AUC |
+| ------------- | ------: |
+| Random Forest |   0.836 |
+| LightGBM      |   0.854 |
+
+### Observation
+
+Both models demonstrated strong predictive performance during cross-validation.
+
+LightGBM achieved the highest average ROC-AUC score and Random Forest delivered comparable results, making both models suitable candidates for further optimization.
+
+---
+
+## Hyperparameter Tuning
+
+Hyperparameter optimization was performed using RandomizedSearchCV.
+
+### Tuned Models
+
+* Random Forest Classifier
+* LightGBM Classifier
+
+The objective was to maximize ROC-AUC while improving generalization performance.
+
+---
+
+## Final Model Evaluation
+
+After tuning, both models were evaluated on the unseen test dataset.
+
+### Model Comparison
+
+| Model         | F1 Score | ROC-AUC |
+| ------------- | -------: | ------: |
+| Random Forest |   0.6077 |  0.8298 |
+| LightGBM      |   0.6063 |  0.8274 |
+
+### Model Selection Strategy
+
+The final model was selected using:
+
+1. Highest F1 Score
+2. Highest ROC-AUC Score (used only if F1 Scores were tied)
+
+Since Random Forest achieved the highest F1 Score, it was selected as the final model.
+
+---
+
+## Final Model Performance
+
+### Selected Model
 
 **Random Forest Classifier**
 
-Mean Cross-Validated F1 Score: **0.857**
+### Test Set Metrics
+
+| Metric    |  Score |
+| --------- | -----: |
+| Accuracy  | 0.7764 |
+| Precision | 0.5688 |
+| Recall    | 0.6524 |
+| F1 Score  | 0.6077 |
+| ROC-AUC   | 0.8298 |
+
+### Classification Summary
+
+The model successfully identifies a significant proportion of churn customers while maintaining reasonable precision.
+
+The recall score indicates that approximately 65% of churning customers are correctly identified, making the model useful for customer retention initiatives.
 
 ---
 
-## Evaluation Metrics
+## Feature Importance
 
-The models are evaluated using:
+The most influential features contributing to churn prediction include:
 
-- Accuracy
-- Precision
-- Recall
-- F1-Score
-- ROC-AUC Score
-- Confusion Matrix
+* Contract Type
+* Tenure Months
+* Monthly Charges
+* Total Charges
+* Internet Service
 
-Special emphasis is placed on Recall and F1-Score to effectively identify customers at risk of churn.
+These variables have the strongest impact on customer churn behavior.
 
 ---
 
@@ -184,23 +241,22 @@ Special emphasis is placed on Recall and F1-Score to effectively identify custom
 
 ### Programming Language
 
-- Python
+* Python
 
 ### Libraries
 
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- LightGBM
-- XGBoost
-- Imbalanced-learn
+* Pandas
+* NumPy
+* Matplotlib
+* Seaborn
+* Scikit-learn
+* LightGBM
+* Imbalanced-learn
 
 ### Development Environment
 
-- Google Colab
-- Jupyter Notebook
+* Google Colab
+* Jupyter Notebook
 
 ---
 
@@ -217,7 +273,7 @@ customer-churn-prediction
 │   └── Customer_Churn_Prediction.ipynb
 │
 ├── reports
-│   └── figures
+│   └── plots
 │
 ├── README.md
 └── requirements.txt
@@ -229,33 +285,25 @@ customer-churn-prediction
 
 ### Completed
 
-- Business Understanding
-- Data Understanding
-- Exploratory Data Analysis (EDA)
-- Data Cleaning
-- Feature Engineering
-- Data Preprocessing
-- Model Development
-- Model Comparison
--Final Model Evaluation
-- Feature Importance Analysis
+* Data Understanding
+* Data Cleaning
+* Exploratory Data Analysis
+* Feature Engineering
+* Data Preprocessing
+* Cross Validation
+* SMOTE Implementation
+* Hyperparameter Tuning
+* Model Evaluation
+* Final Model Selection
+* Feature Importance Analysis
 
-### Upcoming
+### Next Steps
 
-- Business Recommendations
-- Project Conclusion
-
----
-
-## Future Enhancements
-
-- Hyperparameter Tuning
-- Ensemble Modeling
-- Customer Risk Scoring
-- Streamlit Deployment
-- Interactive Dashboard
+* Model Serialization
+* New Customer Prediction Workflow
+* Business Recommendations
+* Project Conclusion
 
 ---
 
-
-This project demonstrates an end-to-end machine learning workflow, from business understanding and exploratory analysis to predictive modeling and actionable business insights.
+This project demonstrates a complete machine learning workflow for customer churn prediction, covering data preparation, exploratory analysis, feature engineering, model optimization, evaluation, and final model selection.
