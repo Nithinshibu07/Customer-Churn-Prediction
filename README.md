@@ -84,10 +84,6 @@ Customer-Churn-Prediction/
 │   └── Processed_Data/
 |       └── churn_processed.csv
 │       └── .gitkeep
-│
-├── models/
-│   └── customer_churn_model.pkl
-│       └── .gitkeep
 |
 ├── report/
 │   └── plots/
