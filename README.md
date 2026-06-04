@@ -271,16 +271,42 @@ Customers with lower accumulated spending generally represent newer customers an
 
 ---
 
-## Business Insights
+### Model Persistence
 
-The analysis suggests that customer retention efforts should focus on:
+To enable future predictions without retraining, the selected Random Forest model was serialized using Python's pickle module.
 
-- Customers with short tenure
-- Month-to-month contract subscribers
-- High monthly charge customers
-- Fiber optic service users
+The following objects were saved:
 
-These customer segments represent the highest churn risk and may benefit from targeted retention campaigns.
+- Trained Random Forest model
+- StandardScaler instance
+- Feature names used during training
+
+This allows the complete prediction pipeline to be reused for new customer records.
+
+---
+
+New Customer Prediction Workflow
+
+A reusable prediction workflow was implemented to score new customers using the trained model.
+
+Prediction Steps
+
+1. Accept new customer information
+2. Apply feature engineering
+3. Perform preprocessing and encoding
+4. Align features with the training dataset
+5. Apply scaling
+6. Generate churn prediction
+7. Calculate churn probability
+
+Example Output
+
+Prediction: Churn
+Churn Probability: 65.47%
+
+Business Value
+
+This workflow enables customer service and retention teams to evaluate churn risk for individual customers and take proactive actions before churn occurs.
 
 ---
 
@@ -328,29 +354,27 @@ customer-churn-prediction
 
 ---
 
-## Current Progress
+## ### Completed
 
-### Completed
-
-* Data Understanding
-* Data Cleaning
-* Exploratory Data Analysis
-* Feature Engineering
-* Data Preprocessing
-* Cross Validation
-* SMOTE Implementation
-* Hyperparameter Tuning
-* Model Evaluation
-* Final Model Selection
-* Feature Importance Analysis
+- Data Understanding
+- Data Cleaning
+- Exploratory Data Analysis
+- Feature Engineering
+- Data Preprocessing
+- Cross Validation
+- SMOTE Implementation
+- Hyperparameter Tuning
+- Model Evaluation
+- Final Model Selection
+- Feature Importance Analysis
+- Business Insights Generation
+- Model Persistence
+- New Customer Prediction Workflow
 
 ### Next Steps
 
-* Model Serialization
-* New Customer Prediction Workflow
-* Business Recommendations
-* Project Conclusion
-
+- Business Recommendations
+- Project Conclusion
 ---
 
 This project demonstrates a complete machine learning workflow for customer churn prediction, covering data preparation, exploratory analysis, feature engineering, model optimization, evaluation, and final model selection.
